@@ -1,0 +1,37 @@
+{
+  "type": "header",
+  "name": "Header Group",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "settings": {
+        "announcement_text": "Spring Wellness Sale: Up to 25% Off + Free Shipping on orders over $45",
+        "background_color": "#012d1d",
+        "text_color": "#ffffff",
+        "text_font_size": 14,
+        "svg_width": 20,
+        "svg_height": 20,
+        "svg_fill_color": "#dda15e"
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "header_bg": "#fdfbf7",
+        "logo_img": "shopify://shop_images/logo.jpg",
+        "logo_width": 60,
+        "logo_height": 60,
+        "search_icon_width": 20,
+        "search_icon_height": 20,
+        "svg_fill_color": "#fdfbf7",
+        "search_placeholder": "Search healthy treats, toys, beds...",
+        "search_icon_color": "#012d1d",
+        "menu_item_color": "#012d1d",
+        "menu_font_size": 14,
+        "user_width": 20,
+        "user_height": 20
+      }
+    }
+  },
+  "order": ["announcement-bar", "header"]
+}

@@ -1,0 +1,35 @@
+{
+    "current": {
+        "color_primary": "#1B4332",
+        "color_secondary": "#526359",
+        "color_cream": "#FDFBF7",
+        "color_accent": "#C88A58",
+        "color_text_main": "#1B4332",
+        "color_text_muted": "#526359",
+        "color_border": "#E5DFD5",
+        "color_sale_badge": "#C88A58",
+        "font_heading": "assistant_n7",
+        "font_body": "assistant_n4",
+        "body_scale": 100,
+        "heading_scale": 100,
+        "page_width": 1300,
+        "grid_gap": 24,
+        "card_image_ratio": "square",
+        "show_vendor": false,
+        "show_secondary_image": true,
+        "enable_quick_add": true,
+        "cart_type": "drawer",
+        "show_free_shipping_bar": true,
+        "free_shipping_threshold": 45,
+        "social_instagram_link": "https://instagram.com",
+        "social_facebook_link": "https://facebook.com"
+    },
+    "presets": {
+        "Default": {
+            "color_primary": "#1B4332",
+            "color_cream": "#FDFBF7",
+            "color_accent": "#C88A58",
+            "cart_type": "drawer"
+        }
+    }
+}

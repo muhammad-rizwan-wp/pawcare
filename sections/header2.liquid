@@ -1,0 +1,299 @@
+{{ 'theme.css' | asset_url | stylesheet_tag }}
+
+{% style %}
+  :root {
+  }
+{% endstyle %}
+
+<header
+  class="site-header {% if section.settings.enable_sticky %} site-header--sticky{% endif %}"
+  data-section-id="{{ section.id }}"
+  data-section-type="header"
+>
+  {% if section.settings.show_announcement and section.settings.announcement_text != blank %}
+    <div
+      class="announcement-bar"
+      role="region"
+      aria-label="{{ 'sections.header.announcement' | t | default: 'Announcement' }}"
+    >
+      <div class="announcement-bar__inner">
+        <div class="announcement-bar__spacer"></div>
+
+        <div class="announcement-bar__content">
+          {% comment %} ICON {% endcomment %}
+          {% if section.settings.announcement_icon != blank %}
+            <span class="material-symbols-outlined announcement-bar__icon" aria-hidden="true">
+              {% comment %} {{ section.settings.announcement_icon | escape }} {% endcomment %}
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M19.0803 15.7203C18.4903 12.1903 15.1003 9.32031 11.5203 9.32031C7.63028 9.32031 4.21028 12.4703 3.88028 16.3503C3.75028 17.8503 4.23028 19.2703 5.22028 20.3403C6.20028 21.4103 7.58028 22.0003 9.08028 22.0003H13.7603C15.4503 22.0003 16.9303 21.3403 17.9403 20.1503C18.9503 18.9603 19.3503 17.3803 19.0803 15.7203Z" fill="#ffffff"></path> <path d="M10.2796 7.86C11.8978 7.86 13.2096 6.54819 13.2096 4.93C13.2096 3.31181 11.8978 2 10.2796 2C8.66141 2 7.34961 3.31181 7.34961 4.93C7.34961 6.54819 8.66141 7.86 10.2796 7.86Z" fill="#ffffff"></path> <path d="M16.94 9.02844C18.2876 9.02844 19.38 7.93601 19.38 6.58844C19.38 5.24086 18.2876 4.14844 16.94 4.14844C15.5924 4.14844 14.5 5.24086 14.5 6.58844C14.5 7.93601 15.5924 9.02844 16.94 9.02844Z" fill="#ffffff"></path> <path d="M20.5496 12.9313C21.6266 12.9313 22.4996 12.0582 22.4996 10.9812C22.4996 9.90429 21.6266 9.03125 20.5496 9.03125C19.4727 9.03125 18.5996 9.90429 18.5996 10.9812C18.5996 12.0582 19.4727 12.9313 20.5496 12.9313Z" fill="#ffffff"></path> <path d="M3.94 10.9816C5.28757 10.9816 6.38 9.88914 6.38 8.54156C6.38 7.19399 5.28757 6.10156 3.94 6.10156C2.59243 6.10156 1.5 7.19399 1.5 8.54156C1.5 9.88914 2.59243 10.9816 3.94 10.9816Z" fill="#ffffff"></path> </g>
+              </svg>
+            </span>
+          {% endif %}
+
+          {% comment %} LINK & CONTENT {% endcomment %}
+          {%- if section.settings.announcement_link != blank -%}
+            <a href="{{ section.settings.announcement_link }}" class="announcement-bar__link">
+              {{ section.settings.announcement_text }}
+            </a>
+
+            {% comment %} CONTENT-ONLY {% endcomment %}
+          {% else %}
+            <span class="announcement-bar__text">{{ section.settings.announcement_text }}</span>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  <div class="header-container">
+    <div class="header-main">
+      {% comment %} BRAND LOGO {% endcomment %}
+      <div class="header-logo-wrapper">
+        <a href="{{ routes.root_url }}" class="header-logo-link" aria-label="{{ shop.name }}">
+          {% if section.settings.logo != blank %}
+            {% assign logo_alt = section.settings.logo.alt | default: shop.name | escape %}
+            {% assign logo_height = section.settings.logo_width | divided_by: section.settings.logo.aspect_ratio %}
+            {{
+              section.settings.logo
+              | image_url: width: 500
+              | image_tag:
+                class: 'header-logo-img',
+                widths: '50, 100, 150, 200, 250, 300, 400, 500',
+                height: logo_height,
+                width: section.settings.logo_width,
+                alt: logo_alt,
+                preload: true
+            }}
+          {% endif %}
+
+          {% if section.settings.show_site_title or section.settings.logo == blank %}
+            <span class="header-logo-text">{{ shop.name }}</span>
+          {% endif %}
+        </a>
+      </div>
+
+      {% comment %} NAVIGATION {% endcomment %}
+      {% if section.settings.menu != blank %}
+        <nav class="header-nav" role="navigation" aria-label="Main navigation">
+          {% for link in section.settings.menu.links %}
+            {% if link.links != blank %}
+              <div class="header-nav__dropdown">
+                <button type="button" class="header-nav__link header-nav__dropdown-trigger" aria-expanded="false">
+                  <span>{{ link.title | escape }}</span>
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M7 10L12 15L17 10" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g>
+                  </svg>
+                </button>
+                <div class="header-nav__dropdown-menu">
+                  <div class="header-nav__dropdown-inner">
+                    {% for childlink in link.links %}
+                      <a
+                        href="{{ childlink.url }}"
+                        class="header-nav__dropdown-item{% if childlink.active %} is-active{% endif %}"
+                        {% if childlink.active %}
+                          aria-current="page"
+                        {% endif %}
+                      >
+                        {{ childlink.title | escape }}
+                      </a>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </nav>
+      {% endif %}
+
+      {% comment %} HEADER ACTION CONTROLS {% endcomment %}
+      <div class="header-actions">
+        {% if section.settings.show_search %}
+          <div class="header-search">
+            <form accept="{{ routes.search_url }}" method="get" role="search" class="header-search__form">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g clip-path="url(#clip0_15_152)"> <rect width="24" height="24" fill="white"></rect> <circle cx="10.5" cy="10.5" r="6.5" stroke="#000000" stroke-linejoin="round"></circle> <path d="M19.6464 20.3536C19.8417 20.5488 20.1583 20.5488 20.3536 20.3536C20.5488 20.1583 20.5488 19.8417 20.3536 19.6464L19.6464 20.3536ZM20.3536 19.6464L15.3536 14.6464L14.6464 15.3536L19.6464 20.3536L20.3536 19.6464Z" fill="#000000"></path> </g> <defs> <clipPath id="clip0_15_152"> <rect width="24" height="24" fill="white"></rect> </clipPath> </defs> </g>
+              </svg>
+              <input
+                type="search"
+                name="q"
+                value="{{ search.terms | escape }}"
+                placeholder="{{ section.settings.search_placeholder | escape }}"
+                class="header-search__input"
+              />
+            </form>
+          </div>
+        {% endif %}
+      </div>
+      {% comment %} WHISHLIST {% endcomment %}
+
+      {% comment %} SHOPPING CART {% endcomment %}
+
+      {% comment %} CUSTOMER ACCOUNT {% endcomment %}
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "section-header",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Sticky Behaviour"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sticky",
+      "label": "Enable Sticky Header",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Announcement Bar"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_announcement",
+      "label": "Show Announcement Bar",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "announcement_icon",
+      "label": "Google Material Icon Name",
+      "default": "pets"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "announcement_text",
+      "label": "Announcement Text",
+      "default": "Spring Wellness Sale: Up to 25% Off + Free Shipping on orders over $45"
+    },
+    {
+      "type": "url",
+      "id": "announcement_link",
+      "label": "Announcement Link"
+    },
+    {
+      "type": "header",
+      "content": "Logo & Branding"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Store Logo"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 50,
+      "max": 300,
+      "step": 5,
+      "default": 120,
+      "unit": "px",
+      "label": "Custom Logo Width"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_site_title",
+      "label": "Show Store Name alongside Logo",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Header Navigation Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "header",
+      "content": "Search Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search",
+      "label": "Show Search Input",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "search_placeholder",
+      "label": "Search Placeholder Text",
+      "default": "Search healthy treats, toys, beds..."
+    },
+    {
+      "type": "header",
+      "content": "Wishlist Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_wishlist",
+      "label": "Show Wishlist Icon",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "wishlist_url",
+      "label": "Wishlist Page Link"
+    },
+    {
+      "type": "text",
+      "id": "wishlist_count_text",
+      "label": "Wishlist Count Badge Text",
+      "default": "2"
+    },
+    {
+      "type": "header",
+      "content": "Customer Account Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_account_image",
+      "label": "Custom User Profile Image"
+    },
+    {
+      "type": "header",
+      "content": "Color Customization"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Header Background Color",
+      "default": "#FDFBF7"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Header Text Color",
+      "default": "#1B4332"
+    },
+    {
+      "type": "color",
+      "id": "announcement_bg",
+      "label": "Announcement Background Color",
+      "default": "#2D4A3E"
+    },
+    {
+      "type": "color",
+      "id": "announcement_text_color",
+      "label": "Announcement Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent / Highlight Color",
+      "default": "#C88A58"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header"
+    }
+  ]
+}
+{% endschema %}
