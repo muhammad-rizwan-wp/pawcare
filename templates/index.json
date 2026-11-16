@@ -3,7 +3,37 @@
     "main": {
       "type": "main-index",
       "settings": {}
+    },
+    "pc_hero_WKn9Xi": {
+      "type": "pc-hero",
+      "name": "Hero",
+      "settings": {
+        "enable_glow": true,
+        "show_badge": true,
+        "badge_txt": "Holistic Pet Wellness • Vet Formulated Since 2019",
+        "heading_txt": "Nourish, Pamper & Protect Your Furry Best Friend",
+        "body_txt": "Vet-approved essentials, wholesome organic treats, and cozy lifestyle goods curated with unconditional love for conscious dog and cat parents.",
+        "dog_btn": "Shop Dogs",
+        "dog_btn_link": "",
+        "cat_btn": "Shop Cats",
+        "cat_btn_link": "",
+        "image": "shopify://shop_images/stage-senior.jpg",
+        "image_alt": "Golden retriever dog and tabby cat sitting together in a warm sunlit living room",
+        "show_gradient": false,
+        "show_vet": true,
+        "vet_icon_image": "shopify://shop_images/approved.png",
+        "vet_title": "Clinical Standard",
+        "vet_text": "100% Vet Approved",
+        "show_review": true,
+        "avater": "shopify://shop_images/pets.png",
+        "star": "shopify://shop_images/star.png",
+        "stars": 5,
+        "rating": "5.0",
+        "review_text": "Both Milo & Cleo thrive on PawCare!",
+        "customer_name": "Emma W.",
+        "verified": "Verified Buyer"
+      }
     }
   },
-  "order": ["main"]
+  "order": ["main", "pc_hero_WKn9Xi"]
 }
