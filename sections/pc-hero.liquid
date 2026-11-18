@@ -1,170 +1,168 @@
-<section class="hero">
-  {% if section.settings.enable_glow %}
-    <div class="hero__glow hero__glow--top"></div>
-    <div class="hero__glow hero__glow--bottom"></div>
-  {% endif %}
-  <div class="container">
-    <div class="hero__grid">
-      <div class="hero__content">
-        {% if section.settings.show_badge and section.settings.badge_txt != blank %}
-          <div class="hero__badge">
-            <span>{{ section.settings.badge_txt | escape }}</span>
-          </div>
+{% if section.settings.enable_glow %}
+  <div class="hero__glow hero__glow--top"></div>
+  <div class="hero__glow hero__glow--bottom"></div>
+{% endif %}
+<div class="container">
+  <div class="hero__grid">
+    <div class="hero__content">
+      {% if section.settings.show_badge and section.settings.badge_txt != blank %}
+        <div class="hero__badge">
+          <span>{{ section.settings.badge_txt | escape }}</span>
+        </div>
+      {% endif %}
+
+      {% if section.settings.heading_txt != blank %}
+        <h1 class="head__h1">{{ section.settings.heading_txt }}</h1>
+      {% endif %}
+
+      {% if section.settings.body_txt != blank %}
+        <div class="desc">
+          <p>{{ section.settings.body_txt | escape | newline_to_br }}</p>
+        </div>
+      {% endif %}
+
+      <div class="hero__actions">
+        {% if section.settings.dog_btn != blank %}
+          <a
+            href="{{ section.settings.dog_btn_link | default: routes.all_products_collection_url }}"
+            class="hero__btn hero__btn--primary"
+          >
+            {{- section.settings.dog_btn | escape -}}
+          </a>
         {% endif %}
 
-        {% if section.settings.heading_txt != blank %}
-          <h1 class="head__h1">{{ section.settings.heading_txt }}</h1>
+        {% if section.settings.cat_btn != blank %}
+          <a
+            href="{{ section.settings.cat_btn_link | default: routes.all_products_collection_url }}"
+            class="hero__btn hero__btn--secondary"
+          >
+            {{- section.settings.cat_btn | escape -}}
+          </a>
         {% endif %}
 
-        {% if section.settings.body_txt != blank %}
-          <div class="desc">
-            <p>{{ section.settings.body_txt | escape | newline_to_br }}</p>
-          </div>
-        {% endif %}
-
-        <div class="hero__actions">
-          {% if section.settings.dog_btn != blank %}
-            <a
-              href="{{ section.settings.dog_btn_link | default: routes.all_products_collection_url }}"
-              class="hero__btn hero__btn--primary"
-            >
-              {{- section.settings.dog_btn | escape -}}
-            </a>
-          {% endif %}
-
-          {% if section.settings.cat_btn != blank %}
-            <a
-              href="{{ section.settings.cat_btn_link | default: routes.all_products_collection_url }}"
-              class="hero__btn hero__btn--secondary"
-            >
-              {{- section.settings.cat_btn | escape -}}
-            </a>
-          {% endif %}
-
-          {% assign trust_points = section.blocks | where: 'type', 'trust' %}
-          {% if trust_points.size > 0 %}
-            <div class="hero__trust">
-              {% for block in trust_points %}
-                {% if block.settings.text != block or block.settings.highlight != blank %}
-                  <div class="hero__trust-item" {{ block.shopify_attributes }}>
-                    {% if block.settings.icon != blank %}
-                      <span style="color: {{ block.settings.icon_color }};">
-                        {{ block.settings.icon | escape }}
-                      </span>
-                    {% endif %}
-
-                    <span class="hero__trust-text">
-                      {% if block.settings.highlight != blank %}
-                        <strong>{{ block.settings.highlight | escape }}</strong>
-                      {% endif %}
-                      {{ block.settings.trusts_desc | escape }}
+        {% assign trust_points = section.blocks | where: 'type', 'trust' %}
+        {% if trust_points.size > 0 %}
+          <div class="hero__trust">
+            {% for block in trust_points %}
+              {% if block.settings.text != block or block.settings.highlight != blank %}
+                <div class="hero__trust-item" {{ block.shopify_attributes }}>
+                  {% if block.settings.icon != blank %}
+                    <span style="color: {{ block.settings.icon_color }};">
+                      {{ block.settings.icon | escape }}
                     </span>
-                  </div>
+                  {% endif %}
+
+                  <span class="hero__trust-text">
+                    {% if block.settings.highlight != blank %}
+                      <strong>{{ block.settings.highlight | escape }}</strong>
+                    {% endif %}
+                    {{ block.settings.trusts_desc | escape }}
+                  </span>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+    <div class="hero__visual">
+      <div class="hero__img-wrap">
+        <div class="hero__image-box">
+          {% if section.settings.image != blank %}
+            {{
+              section.settings.image
+              | image_url: width: 1400
+              | image_tag:
+                class: 'hero__image',
+                loading: 'eager',
+                fetchpriority: 'high',
+                alt: section.settings.image_alt
+            }}
+          {% else %}
+            <div class="hero__placeholder">
+              <span>Add your hero image</span>
+            </div>
+          {% endif %}
+
+          {% if section.settings.show_gradient %}
+            <div class="hero__gradient"></div>
+          {% endif %}
+
+          {% if section.settings.show_vet %}
+            <div class="hero__vet">
+              <div class="hero__vet-icon">
+                {{
+                  section.settings.vet_icon_image
+                  | image_url: width: 30, height: 30
+                  | image_tag: alt: section.settings.vet_title
+                }}
+              </div>
+              <div class="hero__vet-info">
+                {% if section.settings.vet_title != blank %}
+                  <h6>{{ section.settings.vet_title | escape }}</h6>
                 {% endif %}
-              {% endfor %}
+                {% if section.settings.vet_text != blank %}
+                  <p>{{ section.settings.vet_text | escape }}</p>
+                {% endif %}
+              </div>
+            </div>
+          {% endif %}
+
+          {% if section.settings.show_review %}
+            <div class="hero__review">
+              {% if section.settings.avater != blank %}
+                {{
+                  section.settings.avater
+                  | image_url: width: 120, height: 120
+                  | image_tag: class: 'hero__avatar', loading: 'lazy', alt: section.settings.customer_name
+                }}
+              {% endif %}
+              <div class="hero__review-info">
+                <div class="hero__rating">
+                  {% assign stars = section.settings.stars | plus: 0 %}
+                  <div class="rating">
+                    <div class="stars">
+                      {% for star in (1..stars) %}
+                        {{
+                          section.settings.star
+                          | image_url: width: 30, height: 30
+                          | image_tag: alt: section.settings.vet_title, class: 'star__icon'
+                        }}
+                      {% endfor %}
+                    </div>
+                    {% if section.settings.stars != blank %}
+                      <span class="hero__number">{{ section.settings.stars | escape }}</span>
+                    {% endif %}
+                  </div>
+
+                  {% if section.settings.review_text != blank %}
+                    <p>{{ section.settings.review_text | escape }}</p>
+                  {% endif %}
+
+                  {% if section.settings.customer_name != blank %}
+                    <p class="customer">
+                      {{ section.settings.customer_name | escape }}
+                      <span>•</span>
+                      {% if section.settings.verified != blank %}
+                        {{ section.settings.verified | escape }}
+                      {% endif %}
+                    </p>
+                  {% endif %}
+                </div>
+              </div>
             </div>
           {% endif %}
         </div>
       </div>
-      <div class="hero__visual">
-        <div class="hero__img-wrap">
-          <div class="hero__image-box">
-            {% if section.settings.image != blank %}
-              {{
-                section.settings.image
-                | image_url: width: 1400
-                | image_tag:
-                  class: 'hero__image',
-                  loading: 'eager',
-                  fetchpriority: 'high',
-                  alt: section.settings.image_alt
-              }}
-            {% else %}
-              <div class="hero__placeholder">
-                <span>Add your hero image</span>
-              </div>
-            {% endif %}
-
-            {% if section.settings.show_gradient %}
-              <div class="hero__gradient"></div>
-            {% endif %}
-
-            {% if section.settings.show_vet %}
-              <div class="hero__vet">
-                <div class="hero__vet-icon">
-                  {{
-                    section.settings.vet_icon_image
-                    | image_url: width: 30, height: 30
-                    | image_tag: alt: section.settings.vet_title
-                  }}
-                </div>
-                <div class="hero__vet-info">
-                  {% if section.settings.vet_title != blank %}
-                    <h6>{{ section.settings.vet_title | escape }}</h6>
-                  {% endif %}
-                  {% if section.settings.vet_text != blank %}
-                    <p>{{ section.settings.vet_text | escape }}</p>
-                  {% endif %}
-                </div>
-              </div>
-            {% endif %}
-
-            {% if section.settings.show_review %}
-              <div class="hero__review">
-                {% if section.settings.avater != blank %}
-                  {{
-                    section.settings.avater
-                    | image_url: width: 120, height: 120
-                    | image_tag: class: 'hero__avatar', loading: 'lazy', alt: section.settings.customer_name
-                  }}
-                {% endif %}
-                <div class="hero__review-info">
-                  <div class="hero__rating">
-                    {% assign stars = section.settings.stars | plus: 0 %}
-                    <div class="rating">
-                      <div class="stars">
-                        {% for star in (1..stars) %}
-                          {{
-                            section.settings.star
-                            | image_url: width: 30, height: 30
-                            | image_tag: alt: section.settings.vet_title, class: 'star__icon'
-                          }}
-                        {% endfor %}
-                      </div>
-                      {% if section.settings.stars != blank %}
-                        <span class="hero__number">{{ section.settings.stars | escape }}</span>
-                      {% endif %}
-                    </div>
-
-                    {% if section.settings.review_text != blank %}
-                      <p>{{ section.settings.review_text | escape }}</p>
-                    {% endif %}
-
-                    {% if section.settings.customer_name != blank %}
-                      <p class="customer">
-                        {{ section.settings.customer_name | escape }}
-                        <span>•</span>
-                        {% if section.settings.verified != blank %}
-                          {{ section.settings.verified | escape }}
-                        {% endif %}
-                      </p>
-                    {% endif %}
-                  </div>
-                </div>
-              </div>
-            {% endif %}
-          </div>
-        </div>
-      </div>
     </div>
   </div>
-</section>
+</div>
 
 {% schema %}
 {
   "name": "Hero",
   "tag": "section",
-  "class": "pc-hero-section",
+  "class": "hero",
   "settings": [
     { "type": "header", "content": "Background" },
     { "type": "checkbox", "id": "enable_glow", "label": "Enable bg glow", "default": true },
