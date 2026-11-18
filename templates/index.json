@@ -33,7 +33,22 @@
         "customer_name": "Emma W.",
         "verified": "Verified Buyer"
       }
+    },
+    "general_collection_QPbxi4": {
+      "type": "general-collection",
+      "name": "Collection",
+      "settings": {
+        "pc__bg": "#FDFBF7",
+        "section_label": "Curated Collections",
+        "label_color": "#DDA15E",
+        "section_heading": "Shop by Wellness Needs",
+        "heading_color": "#012D1D",
+        "button_text": "Show all collections",
+        "button_color": "#012D1D",
+        "button_link": "shopify://collections",
+        "gen_collection": "gaming-gadgets"
+      }
     }
   },
-  "order": ["main", "pc_hero_WKn9Xi"]
+  "order": ["main", "pc_hero_WKn9Xi", "general_collection_QPbxi4"]
 }
