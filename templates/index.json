@@ -38,17 +38,72 @@
       "type": "general-collection",
       "name": "Collection",
       "settings": {
-        "pc__bg": "#FDFBF7",
+        "pc__bg": "#fdfbf7",
         "section_label": "Curated Collections",
-        "label_color": "#DDA15E",
+        "label_color": "#dda15e",
         "section_heading": "Shop by Wellness Needs",
-        "heading_color": "#012D1D",
+        "heading_color": "#012d1d",
         "button_text": "Show all collections",
-        "button_color": "#012D1D",
+        "button_color": "#012d1d",
         "button_link": "shopify://collections",
         "gen_collection": "gaming-gadgets"
       }
+    },
+    "tabs_U3bnTp": {
+      "type": "tabs",
+      "blocks": {
+        "collection_tab_EkY7Xp": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_title": "All",
+            "tab-collection": "gaming-gadgets"
+          }
+        },
+        "collection_tab_FJXdxL": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_title": "Dogs",
+            "tab-collection": "best-seller"
+          }
+        },
+        "collection_tab_w9bHbD": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_title": "Cats",
+            "tab-collection": "best-seller"
+          }
+        },
+        "collection_tab_MPXHGF": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_title": "New Arrivals",
+            "tab-collection": "best-seller"
+          }
+        }
+      },
+      "block_order": [
+        "collection_tab_EkY7Xp",
+        "collection_tab_FJXdxL",
+        "collection_tab_w9bHbD",
+        "collection_tab_MPXHGF"
+      ],
+      "name": "Tabs",
+      "settings": {
+        "section_bg": "#F6F2E9",
+        "section_label": "Community Top Picks",
+        "label_color": "#DDA15E",
+        "section_heading": "Pet Parent Favorites",
+        "heading_color": "#012D1D",
+        "section_body": "Our most-loved daily wellness formulas and cozy playtime essentials",
+        "body_color": "#012D1D",
+        "product_limit": 4
+      }
     }
   },
-  "order": ["main", "pc_hero_WKn9Xi", "general_collection_QPbxi4"]
+  "order": [
+    "main",
+    "pc_hero_WKn9Xi",
+    "general_collection_QPbxi4",
+    "tabs_U3bnTp"
+  ]
 }
