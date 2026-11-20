@@ -148,6 +148,10 @@ form.header-search__form {
   height: 20px;
 }
 
+.header-search .header-search__input:focus-visible {
+  outline: none;
+}
+
 .pc-user {
   display: flex;
   align-items: center;
@@ -224,8 +228,13 @@ form.header-search__form {
 
   /* Dropdown panel */
 
+  .pc-header__menu {
+    z-index: 9;
+  }
+
   .header__toggle {
     display: inline-flex;
+    z-index: 99;
   }
 
   .pc__nav {
@@ -593,6 +602,111 @@ h1.head__h1 {
   background: var(--color-primary);
 }
 
+/* TAB */
+
+.pc__tab-list {
+  display: flex;
+  justify-content: end;
+  margin-bottom: 1rem;
+}
+
+.pc__tab-list .btn-group {
+  background-color: var(--color-cream);
+  padding: 7px;
+  border-radius: 99px;
+}
+
+.pc__tab-list .tab-btn {
+  border: none;
+  background-color: transparent;
+  font-size: 16px;
+  padding: 5px 15px;
+  border-radius: 99px;
+  color: var(--color-primary);
+  cursor: pointer;
+}
+
+.pc__tab-list .tab-btn.active {
+  background: var(--color-primary);
+  color: var(--color-cream);
+}
+
+.pc__tab-panel {
+  margin-top: 2.5rem;
+}
+
+.pc__tab-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.pc__tab-grid .tab__grid-item {
+  padding: 10px;
+  background-color: var(--color-cream);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.tab__img {
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.tab__img img {
+  width: 100%;
+  height: auto;
+}
+
+.tab__item-meta a {
+  background: var(--color-primary);
+  color: var(--color-cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  border-radius: 5px;
+  gap: 0.25rem;
+  padding: 10px;
+}
+
+.tab__item-meta svg {
+  width: 20px;
+  height: 20px;
+  transform: rotate(0deg);
+}
+
+.tab__item-meta svg g {
+  fill: var(--color-cream);
+}
+
+.tab__item-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tab__item-content h3 {
+  color: #012d1d;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  margin-block: 0.5rem 0;
+}
+
+.tab__item-content p {
+  font-size: 14px;
+  color: var(--color-muted);
+  line-height: 20px;
+  margin-block: 0 0.25rem;
+}
+
+.tab__item-content span.price {
+  color: var(--color-primary);
+  font-size: 14px;
+  font-weight: 600;
+}
+
 /* >>> TABLET <<< */
 @media only screen and (min-width:601px) and (max-width:900px) {
   .hero__grid {
@@ -604,6 +718,10 @@ h1.head__h1 {
   }
 
   .pc__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pc__tab-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -658,6 +776,16 @@ h1.head__h1 {
   }
 
   .pc__grid {
+    grid-template-columns: none;
+  }
+
+  /* TABS */
+  .pc__tab-list {
+    position: sticky;
+    top: 10px;
+  }
+
+  .pc__tab-grid {
     grid-template-columns: none;
   }
 }

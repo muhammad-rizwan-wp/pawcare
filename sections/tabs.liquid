@@ -1,0 +1,201 @@
+<div style="background: {{ section.settings.section_bg }}">
+  <div class="container wrapper">
+    {% comment %} CONTENT {% endcomment %}
+    <div class="pc__heading">
+      <div class="content">
+        <span class="pc__tag" style="color: {{ section.settings.label_color }}">
+          {{ section.settings.section_label }}
+        </span>
+        <h2 class="head__h2" style="color: {{ section.settings.heading_color }}">
+          {{ section.settings.section_heading }}
+        </h2>
+        <p style="color: {{ section.settings.body_color }}">{{ section.settings.section_body }}</p>
+      </div>
+    </div>
+    {% comment %} TABS {% endcomment %}
+    <div class="pc__tabs">
+      {% comment %} Tabs links {% endcomment %}
+      {% if section.blocks.size > 0 %}
+        <div class="pc__tab-list" role="tablist">
+          <div class="btn-group">
+            {% for block in section.blocks %}
+              <button
+                type="button"
+                class="tab-btn {% if forloop.first %}active{% endif %}"
+                id="tab-{{ block.id }}"
+                role="tab"
+                aria-controls="tab-panel-{{ block.id }}"
+                aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+                {{ block.shopify_attributes }}
+              >
+                {{ block.settings.tab_title | default: 'Collection' }}
+              </button>
+            {%- endfor %}
+          </div>
+        </div>
+        <div class="pc__tab-panel">
+          {% for block in section.blocks %}
+            {% assign selected_tab = block.settings['tab-collection'] %}
+            <div
+              id="tab-panel-{{ block.id }}"
+              class="tab-panel {% if forloop.first %}active{% endif %}"
+              role="tabpanel"
+              aria-labelledby="tab-{{ block.id }}"
+              {% unless forloop.first %}
+                hidden
+              {% endunless %}
+            >
+              {% if selected_tab != blank %}
+                {% assign limit = section.settings.product_limit %}
+
+                <div class="pc__tab-grid">
+                  {% for product in selected_tab.products limit: limit %}
+                    <div class="tab__grid-item">
+                      {% comment %} IMAGE {% endcomment %}
+                      <div class="tab__img">
+                        {% if product.featured_image != blank %}
+                          {{
+                            product.featured_image
+                            | image_url: width: 700
+                            | image_tag: loading: 'lazy', alt: product.featured_image.alt
+                          }}
+                        {% else %}
+                          {{ 'product-1' | placeholder_svg_tag }}
+                        {% endif %}
+                      </div>
+
+                      {% comment %} CONTENT {% endcomment %}
+                      <div class="tab__item-content">
+                        <h3>{{ product.title | escape }}</h3>
+                        {% if product.description != blank %}
+                          {% assign description_words = product.description | strip_html | strip | split: ' ' %}
+                          <p>{{ description_words | slice: 0, 10 | join: ' ' }}...</p>
+                        {% endif %}
+                        <span class="price">{{ product.price | money }}</span>
+                        <div class="tab__item-meta">
+                          <a href="{{ product.url }}"
+                            >Add to Cart
+                            <svg
+                              viewBox="-3.6 -10.1 43.2 43.2"
+                              version="1.1"
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              fill="#000000"
+                              transform="rotate(-45)"
+                            >
+                              <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><g id="icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="ui-gambling-website-lined-icnos-casinoshunter" transform="translate(-212.000000, -159.000000)" fill="#252528" fill-rule="nonzero"><g class="card_svg" id="square-filled" transform="translate(50.000000, 120.000000)"><path d="M187.108012,39.2902857 L197.649804,49.7417043 L197.708994,49.7959169 C197.889141,49.9745543 197.986143,50.2044182 198,50.4382227 L198,50.5617773 C197.986143,50.7955818 197.889141,51.0254457 197.708994,51.2040831 L197.6571,51.2479803 L187.108012,61.7097143 C186.717694,62.0967619 186.084865,62.0967619 185.694547,61.7097143 C185.30423,61.3226668 185.30423,60.6951387 185.694547,60.3080911 L194.702666,51.3738496 L162.99947,51.3746291 C162.447478,51.3746291 162,50.9308997 162,50.3835318 C162,49.8361639 162.447478,49.3924345 162.99947,49.3924345 L194.46779,49.3916551 L185.694547,40.6919089 C185.30423,40.3048613 185.30423,39.6773332 185.694547,39.2902857 C186.084865,38.9032381 186.717694,38.9032381 187.108012,39.2902857 Z M197.115357,50.382693 L186.401279,61.0089027 L197.002151,50.5002046 L197.002252,50.4963719 L196.943142,50.442585 L196.882737,50.382693 L197.115357,50.382693 Z" id="right-arrow"></path></g></g></g></g>
+                            </svg>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  {% else %}
+                    <p>No products found in this collection.</p>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p>Add collection tabs</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Tabs",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section background"
+    },
+    {
+      "type": "color",
+      "id": "section_bg",
+      "label": "Choose color",
+      "default": "#fff"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "section_label",
+      "label": "Section label",
+      "default": "Community Top Picks"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label color",
+      "default": "#000"
+    },
+    {
+      "type": "text",
+      "id": "section_heading",
+      "label": "Heading",
+      "default": "Pet Parent Favorites"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000"
+    },
+    {
+      "type": "text",
+      "id": "section_body",
+      "label": "Body",
+      "default": "Our most-loved daily wellness formulas and cozy playtime essentials"
+    },
+    {
+      "type": "color",
+      "id": "body_color",
+      "label": "Body color",
+      "default": "#000"
+    },
+    {
+      "type": "header",
+      "content": "Tab Settings"
+    },
+    {
+      "type": "range",
+      "id": "product_limit",
+      "label": "Products per tab",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 4
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_tab",
+      "name": "Collection tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Tab title"
+        },
+        {
+          "type": "collection",
+          "id": "tab-collection",
+          "label": "Select collection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Tabs",
+      "category": "General"
+    }
+  ]
+}
+{% endschema %}
