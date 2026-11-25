@@ -1,0 +1,180 @@
+<div style="background: {{ section.settings.section_bg }}">
+  <div class="container wrapper">
+    {% if section.blocks.size > 0 %}
+      <div class="banner__grid">
+        {% for block in section.blocks %}
+          {% liquid
+            assign target_collection = block.settings.collection
+            assign card_img = block.settings.custom_image | default: target_collection.featured_image
+            assign card_title = block.settings.card_heading | default: target_collection.title
+          %}
+          <div
+            class="banner__card"
+            style="
+              --banner-card-bg: {{ block.settings.card_bg }};
+              --banner-badge-bg: {{ block.settings.card_badge_bg }};
+              --banner-badge-text: {{ block.settings.card_badge_txtcolor }};
+              --banner-title-color: {{ block.settings.card_title_color }};
+              --banner-desc-color: {{ block.settings.card_desc_color }};
+              --banner-btn-bg: {{ block.settings.card_btn_bg }};
+              --banner-btn-color: {{ block.settings.card_btn_color }};
+              --banner-btnhover-bg: {{ block.settings.card_btn_bg_hover }};
+            "
+          >
+            <div class="banner__media">
+              {% if card_img != blank %}
+                {{ card_img | image_url: width: 1000 | image_tag: alt: block.settings.card_heading }}
+              {% else %}
+                {% capture placeholder_index %}
+                  {% cycle 1, 2 %}
+                {% endcapture %}
+                {{ 'lifestyle' | append: placeholder_index | placeholder_svg_tag }}
+              {% endif %}
+              <div class="banner__overlay"></div>
+            </div>
+            <div class="banner__content">
+              {% if block.settings.card_label != blank %}
+                <span class="pc__badge">
+                  {{ block.settings.card_label | escape }}
+                </span>
+              {% endif %}
+
+              {% if block.settings.card_heading != blank %}
+                <h3>{{ block.settings.card_heading | escape }}</h3>
+              {% endif %}
+
+              {% if block.settings.card_desc != blank %}
+                <p>{{ block.settings.card_desc | escape }}</p>
+              {% endif %}
+
+              {% if block.settings.card_btn_txt and block.settings.card_btn_url != blank %}
+                <a href="{{ block.settings.card_btn_url }}">{{ block.settings.card_btn_txt }}</a>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Banners",
+  "tag": "section",
+  "class": "pc__banner",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Background"
+    },
+    {
+      "type": "color",
+      "id": "section_bg",
+      "label": "Background"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "banner_card",
+      "name": "Banner Card",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Collection & Media"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Select collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_image",
+          "label": "Custom Background Image"
+        },
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "text",
+          "id": "card_label",
+          "label": "Label"
+        },
+        {
+          "type": "text",
+          "id": "card_heading",
+          "label": "Heading"
+        },
+        {
+          "type": "textarea",
+          "id": "card_desc",
+          "label": "Description"
+        },
+        {
+          "type": "text",
+          "id": "card_btn_txt",
+          "label": "Button label"
+        },
+        {
+          "type": "url",
+          "id": "card_btn_url",
+          "label": "Button link"
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "card_bg",
+          "label": "Gradient base color"
+        },
+        {
+          "type": "color",
+          "id": "card_badge_bg",
+          "label": "Badge background"
+        },
+        {
+          "type": "color",
+          "id": "card_badge_txtcolor",
+          "label": "Badge text color"
+        },
+        {
+          "type": "color",
+          "id": "card_title_color",
+          "label": "Title color"
+        },
+        {
+          "type": "color",
+          "id": "card_desc_color",
+          "label": "Description color"
+        },
+        {
+          "type": "color",
+          "id": "card_btn_bg",
+          "label": "Button background"
+        },
+        {
+          "type": "color",
+          "id": "card_btn_color",
+          "label": "Button color"
+        },
+        {
+          "type": "color",
+          "id": "card_btn_bg_hover",
+          "label": "Button hover bg"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Banner",
+      "category": "General"
+    }
+  ]
+}
+{% endschema %}

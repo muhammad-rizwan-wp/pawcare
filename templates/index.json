@@ -89,14 +89,64 @@
       ],
       "name": "Tabs",
       "settings": {
-        "section_bg": "#F6F2E9",
+        "section_bg": "#f6f2e9",
         "section_label": "Community Top Picks",
-        "label_color": "#DDA15E",
+        "label_color": "#dda15e",
         "section_heading": "Pet Parent Favorites",
-        "heading_color": "#012D1D",
+        "heading_color": "#012d1d",
         "section_body": "Our most-loved daily wellness formulas and cozy playtime essentials",
-        "body_color": "#012D1D",
+        "body_color": "#012d1d",
         "product_limit": 4
+      }
+    },
+    "banners_PVt3PB": {
+      "type": "banners",
+      "blocks": {
+        "banner_card_rBrCje": {
+          "type": "banner_card",
+          "settings": {
+            "collection": "best-seller",
+            "custom_image": "shopify://shop_images/Dogs_Collection_Banner.jpg",
+            "card_label": "Canine Essentials",
+            "card_heading": "Built for Pure Pup Joy",
+            "card_desc": "Everything your pup needs for mountain treks, park zoomies, and sound nighttime snoozing.",
+            "card_btn_txt": "Explore Dog Collection",
+            "card_btn_url": "shopify://collections/best-seller",
+            "card_bg": "#1B4332",
+            "card_badge_bg": "#D8E8DF",
+            "card_badge_txtcolor": "#1B4332",
+            "card_title_color": "#FFFFFF",
+            "card_desc_color": "#E5EFEA",
+            "card_btn_bg": "#FDFBF7",
+            "card_btn_color": "#1B4332",
+            "card_btn_bg_hover": "#EBE5D9"
+          }
+        },
+        "banner_card_mpUfKG": {
+          "type": "banner_card",
+          "settings": {
+            "collection": "gaming-gadgets",
+            "custom_image": "shopify://shop_images/Cats_Collection_Banner.jpg",
+            "card_label": "Feline Sanctuary",
+            "card_heading": "Curious Whiskers & Naps",
+            "card_desc": "Wholesome grain-free purées, soothing catnip infusions, and architectural scratching lounges.",
+            "card_btn_txt": "Explore Cat Collection",
+            "card_btn_url": "shopify://collections/gaming-gadgets",
+            "card_bg": "#2D4A3E",
+            "card_badge_bg": "#F3DEC9",
+            "card_badge_txtcolor": "#4A2C11",
+            "card_title_color": "#FFFFFF",
+            "card_desc_color": "#EBE5D9",
+            "card_btn_bg": "#FDFBF7",
+            "card_btn_color": "#1B4332",
+            "card_btn_bg_hover": "#EBE5D9"
+          }
+        }
+      },
+      "block_order": ["banner_card_rBrCje", "banner_card_mpUfKG"],
+      "name": "Banner",
+      "settings": {
+        "section_bg": ""
       }
     }
   },
@@ -104,6 +154,7 @@
     "main",
     "pc_hero_WKn9Xi",
     "general_collection_QPbxi4",
-    "tabs_U3bnTp"
+    "tabs_U3bnTp",
+    "banners_PVt3PB"
   ]
 }
