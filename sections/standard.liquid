@@ -1,0 +1,152 @@
+<div style="background: {{ section.settings.pc__bg }}">
+  <div class="container wrapper">
+    <div class="pc__heading txt__center">
+      <div class="content">
+        <span class="pc__tag" style="color: {{ section.settings.label_color }}">
+          {{ section.settings.section_label }}
+        </span>
+        <h2 class="head__h2" style="color: {{ section.settings.heading_color }}">
+          {{ section.settings.section_heading }}
+        </h2>
+        <p style="color: {{ section.settings.card_body_color }}">{{ section.settings.section_body }}</p>
+      </div>
+    </div>
+    <div class="pc__standard-cards">
+      {% for block in section.blocks %}
+        <div class="standard__card" style="background-color: {{ section.settings.card_bg }}">
+          <div class="icon" style="background-color: {{ section.settings.card_iconbg }}">
+            {% if block.settings.card_icon != blank %}
+              {{
+                block.settings.card_icon
+                | image_url: width: 128
+                | image_tag: alt: block.settings.card_heading, widths: '64, 100, 128'
+              }}
+            {% else %}
+              {{ 'lifestyle' | placeholder_svg_tag }}
+            {% endif %}
+          </div>
+
+          <h3 style="color: {{ section.settings.card_heading_color }}">{{ block.settings.card_heading }}</h3>
+          <p style="color: {{ section.settings.card_body_color }}">{{ block.settings.card_body }}</p>
+        </div>
+      {%- endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Standard",
+  "tag": "section",
+  "class": "pc__standards",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Background"
+    },
+    {
+      "type": "color",
+      "id": "pc__bg",
+      "label": "Color"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "section_label",
+      "label": "Label",
+      "default": "Enter section label"
+    },
+    {
+      "type": "text",
+      "id": "section_heading",
+      "label": "Heading",
+      "default": "Enter section heading"
+    },
+    {
+      "type": "text",
+      "id": "section_body",
+      "label": "Body",
+      "default": "Enter section body"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label color"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color"
+    },
+    {
+      "type": "color",
+      "id": "body_color",
+      "label": "Body Color"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card Background"
+    },
+    {
+      "type": "color",
+      "id": "card_iconbg",
+      "label": "Icon Background"
+    },
+    {
+      "type": "color",
+      "id": "card_heading_color",
+      "label": "Heading Color"
+    },
+    {
+      "type": "color",
+      "id": "card_body_color",
+      "label": "Body Color"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "standard_card",
+      "name": "Standard Card",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Card Media"
+        },
+        {
+          "type": "image_picker",
+          "id": "card_icon",
+          "label": "Card Icon"
+        },
+        {
+          "type": "header",
+          "content": "Card Content"
+        },
+        {
+          "type": "text",
+          "id": "card_heading",
+          "label": "Heading"
+        },
+        {
+          "type": "textarea",
+          "id": "card_body",
+          "label": "Body"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Standards",
+      "category": "General"
+    }
+  ]
+}
+{% endschema %}

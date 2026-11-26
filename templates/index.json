@@ -112,14 +112,14 @@
             "card_desc": "Everything your pup needs for mountain treks, park zoomies, and sound nighttime snoozing.",
             "card_btn_txt": "Explore Dog Collection",
             "card_btn_url": "shopify://collections/best-seller",
-            "card_bg": "#1B4332",
-            "card_badge_bg": "#D8E8DF",
-            "card_badge_txtcolor": "#1B4332",
-            "card_title_color": "#FFFFFF",
-            "card_desc_color": "#E5EFEA",
-            "card_btn_bg": "#FDFBF7",
-            "card_btn_color": "#1B4332",
-            "card_btn_bg_hover": "#EBE5D9"
+            "card_bg": "#1b4332",
+            "card_badge_bg": "#d8e8df",
+            "card_badge_txtcolor": "#1b4332",
+            "card_title_color": "#ffffff",
+            "card_desc_color": "#e5efea",
+            "card_btn_bg": "#fdfbf7",
+            "card_btn_color": "#1b4332",
+            "card_btn_bg_hover": "#ebe5d9"
           }
         },
         "banner_card_mpUfKG": {
@@ -132,14 +132,14 @@
             "card_desc": "Wholesome grain-free purées, soothing catnip infusions, and architectural scratching lounges.",
             "card_btn_txt": "Explore Cat Collection",
             "card_btn_url": "shopify://collections/gaming-gadgets",
-            "card_bg": "#2D4A3E",
-            "card_badge_bg": "#F3DEC9",
-            "card_badge_txtcolor": "#4A2C11",
-            "card_title_color": "#FFFFFF",
-            "card_desc_color": "#EBE5D9",
-            "card_btn_bg": "#FDFBF7",
-            "card_btn_color": "#1B4332",
-            "card_btn_bg_hover": "#EBE5D9"
+            "card_bg": "#2d4a3e",
+            "card_badge_bg": "#f3dec9",
+            "card_badge_txtcolor": "#4a2c11",
+            "card_title_color": "#ffffff",
+            "card_desc_color": "#ebe5d9",
+            "card_btn_bg": "#fdfbf7",
+            "card_btn_color": "#1b4332",
+            "card_btn_bg_hover": "#ebe5d9"
           }
         }
       },
@@ -148,6 +148,63 @@
       "settings": {
         "section_bg": ""
       }
+    },
+    "standard_MAVFzA": {
+      "type": "standard",
+      "blocks": {
+        "standard_card_33bWUE": {
+          "type": "standard_card",
+          "settings": {
+            "card_icon": "shopify://shop_images/Vet_Formulated.png",
+            "card_heading": "100% Vet Formulated",
+            "card_body": "Pure, bioavailable clinical ingredients verified by practicing veterinarians with zero toxic fillers or artificial dyes."
+          }
+        },
+        "standard_card_PMKrkT": {
+          "type": "standard_card",
+          "settings": {
+            "card_icon": "shopify://shop_images/Cruelty-Free.png",
+            "card_heading": "Sustainable & Cruelty-Free",
+            "card_body": "Post-consumer recycled containers, ethically sourced organic botanicals, and carbon-neutral fulfillment facilities."
+          }
+        },
+        "standard_card_TBb3qe": {
+          "type": "standard_card",
+          "settings": {
+            "card_icon": "shopify://shop_images/Purr_Guarantee.png",
+            "card_heading": "30-Day Wag & Purr Guarantee",
+            "card_body": "If your pet doesn't enthusiastically love any treat or accessory, we will replace or refund it without hesitation."
+          }
+        },
+        "standard_card_n3Ktf3": {
+          "type": "standard_card",
+          "settings": {
+            "card_icon": "shopify://shop_images/Pet_Care_Experts.png",
+            "card_heading": "Dedicated Pet Care Experts",
+            "card_body": "Licensed veterinary technicians available 7 days a week over live chat to answer diet, dosing, and wellness questions."
+          }
+        }
+      },
+      "block_order": [
+        "standard_card_33bWUE",
+        "standard_card_PMKrkT",
+        "standard_card_TBb3qe",
+        "standard_card_n3Ktf3"
+      ],
+      "name": "Standards",
+      "settings": {
+        "pc__bg": "#e1f9ec",
+        "section_label": "The PawCare Standard",
+        "section_heading": "Peace of Mind in Every Package",
+        "section_body": "We uphold human-grade transparency, rigorous science, and sustainable ethics because pets are true family.",
+        "label_color": "#dda15e",
+        "heading_color": "#012d1d",
+        "body_color": "#414844",
+        "card_bg": "#ffffff",
+        "card_iconbg": "#e1f9ec",
+        "card_heading_color": "#012d1d",
+        "card_body_color": "#414844"
+      }
     }
   },
   "order": [
@@ -155,6 +212,7 @@
     "pc_hero_WKn9Xi",
     "general_collection_QPbxi4",
     "tabs_U3bnTp",
-    "banners_PVt3PB"
+    "banners_PVt3PB",
+    "standard_MAVFzA"
   ]
 }

@@ -799,8 +799,60 @@ h1.head__h1 {
 
 /* end of Banner */
 
+/* STANDARDS */
+.pc__standards .pc__heading {
+  justify-content: center !important;
+  grid-template-columns: auto;
+}
+
+.pc__standards .pc__heading .content {
+  text-align: center;
+}
+
+.pc__standard-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.standard__card {
+  padding: 1.5rem;
+  border-radius: 1rem;
+}
+
+.standard__card .icon {
+  display: inline-block;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.standard__card .icon>img {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+}
+
+.standard__card h3 {
+  font-size: 18px;
+  margin-block: 0.75rem 0.5rem;
+  font-weight: 700;
+}
+
+.standard__card p {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  margin-block: 0 0.5rem;
+}
+
+/* end STANDARDS */
+
 /* >>> TABLET <<< */
 @media only screen and (min-width:601px) and (max-width:900px) {
+  header .container {
+    padding-inline: 1rem;
+  }
+
   .hero__grid {
     grid-template-columns: auto;
   }
@@ -814,6 +866,11 @@ h1.head__h1 {
   }
 
   .pc__tab-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* STANDARDS */
+  .pc__standard-cards {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -898,5 +955,10 @@ h1.head__h1 {
 
   .banner__grid a {
     font-size: 14px;
+  }
+
+  /* STANDARDS */
+  .pc__standard-cards {
+    grid-template-columns: none;
   }
 }
