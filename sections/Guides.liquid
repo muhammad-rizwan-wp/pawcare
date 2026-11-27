@@ -1,0 +1,280 @@
+{% liquid
+  assign selected_blog = section.settings.blog
+  assign article_limit = section.settings.articles_to_show | default: 3
+%}
+
+<div style="background: {{ section.settings.pc__bg }}">
+  <div class="container wrapper">
+    <div class="pc__heading">
+      <div class="content">
+        <span class="pc__tag" style="color: {{ section.settings.label_color }}">
+          {{- section.settings.section_label -}}
+        </span>
+        <h2 class="head__h2" style="color: {{ section.settings.heading_color }}">
+          {{ section.settings.section_heading }}
+        </h2>
+      </div>
+      <div class="link">
+        <a href="{{ section.settings.button_link }}" style="color: {{ section.settings.button_color }};">
+          {{- section.settings.button_text }}&nbsp;
+          <span class="button__icon">
+            <svg
+              viewBox="-3.6 -10.1 43.2 43.2"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              fill="#000000"
+              transform="rotate(0)"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
+                </g>
+                <g id="SVGRepo_iconCarrier">
+                    <g id="icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                      <g id="ui-gambling-website-lined-icnos-casinoshunter" transform="translate(-212.000000, -159.000000)" fill="{{ section.settings.button_color }}" fill-rule="nonzero">
+                        <g id="square-filled" transform="translate(50.000000, 120.000000)">
+                          <path d="M187.108012,39.2902857 L197.649804,49.7417043 L197.708994,49.7959169 C197.889141,49.9745543 197.986143,50.2044182 198,50.4382227 L198,50.5617773 C197.986143,50.7955818 197.889141,51.0254457 197.708994,51.2040831 L197.6571,51.2479803 L187.108012,61.7097143 C186.717694,62.0967619 186.084865,62.0967619 185.694547,61.7097143 C185.30423,61.3226668 185.30423,60.6951387 185.694547,60.3080911 L194.702666,51.3738496 L162.99947,51.3746291 C162.447478,51.3746291 162,50.9308997 162,50.3835318 C162,49.8361639 162.447478,49.3924345 162.99947,49.3924345 L194.46779,49.3916551 L185.694547,40.6919089 C185.30423,40.3048613 185.30423,39.6773332 185.694547,39.2902857 C186.084865,38.9032381 186.717694,38.9032381 187.108012,39.2902857 Z M197.115357,50.382693 L186.401279,61.0089027 L197.002151,50.5002046 L197.002252,50.4963719 L196.943142,50.442585 L196.882737,50.382693 L197.115357,50.382693 Z" id="right-arrow">
+                            </path>
+                          </g>
+                        </g>
+                      </g>
+                    </g>
+            </svg></span
+        ></a>
+      </div>
+    </div>
+    <div class="guides__grid guide-lg-{{ section.settings.columns_desktop }}">
+      {% if selected_blog != blank %}
+        {% for article in selected_blog.articles limit: article_limit %}
+          {% liquid
+            assign word_count = article.content | strip_html | split: ' ' | size
+            assign read_minutes = word_count | divided_by: 200
+
+            if read_minutes < 1
+              assign read_minutes = 1
+            endif
+
+            assign badge_part = ''
+            if section.settings.show_category_tag and article.tags.size > 0
+              assign badge_part = article.tags.first
+            endif
+
+            if section.settings.show_read_time
+              assign read_time_label = read_minutes | append: ' ' | append: section.settings.read_time_suffix
+
+              if badge_part != blank
+                assign badge_part = badge_part | append: ' • ' | append: read_time_label
+              else
+                assign badge_part = read_time_label
+              endif
+            endif
+          %}
+          <article>
+            <div class="guide__media">
+              <a href="{{ article.url }}" aria-label="{{ article.title | escape }}">
+                {% if article.image != blank %}
+                  {% assign img_alt = article.image.alt | default: article.title | escape %}
+                  {{ article.image | image_url: width: 500 | image_tag: widths: '320, 500, 600', alt: img_alt }}
+                {% else %}
+                  {% capture placeholder_index %}
+                    {% cycle 1, 2, 3 %}
+                  {% endcapture %}
+                  {{ 'lifestyle-' | append: placeholder_index | placeholder_svg_tag }}
+                {% endif %}
+              </a>
+              {% if badge_part != blank %}
+                <span class="badge">{{ badge_part | escape }}</span>
+              {% endif %}
+            </div>
+            <div class="guide__content">
+              <h3>
+                <a href="{{ article.url }}">{{ article.title }}</a>
+              </h3>
+              <p>{{ article.excerpt_or_content | strip_html | truncatewords: section.settings.excerpt_words }}</p>
+              <div class="guide__meta">
+                {% if section.settings.show_date or section.settings.show_author %}
+                  <span class="guide__publish-date">
+                    {% if section.settings.show_date %}
+                      {{ article.published_at | time_tag: format: 'abbreviated_date' }}
+                    {% endif %}
+                  </span>
+                  {% if section.settings.show_author %}
+                    <span class="guide__author">{{ article.author }}</span>
+                  {% endif %}
+                {% endif %}
+              </div>
+              <a class="guide__readmore" href="{{ article.url }}">
+                {{ section.settings.read_more_label | default: 'Read More' }}
+                <svg
+                  viewBox="-3.6 -10.1 43.2 43.2"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  fill="#000000"
+                  transform="rotate(-45)"
+                >
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <g id="icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                      <g id="ui-gambling-website-lined-icnos-casinoshunter" transform="translate(-212.000000, -159.000000)" fill="#252528" fill-rule="nonzero">
+                        <g class="card_svg" id="square-filled" transform="translate(50.000000, 120.000000)">
+                          <path d="M187.108012,39.2902857 L197.649804,49.7417043 L197.708994,49.7959169 C197.889141,49.9745543 197.986143,50.2044182 198,50.4382227 L198,50.5617773 C197.986143,50.7955818 197.889141,51.0254457 197.708994,51.2040831 L197.6571,51.2479803 L187.108012,61.7097143 C186.717694,62.0967619 186.084865,62.0967619 185.694547,61.7097143 C185.30423,61.3226668 185.30423,60.6951387 185.694547,60.3080911 L194.702666,51.3738496 L162.99947,51.3746291 C162.447478,51.3746291 162,50.9308997 162,50.3835318 C162,49.8361639 162.447478,49.3924345 162.99947,49.3924345 L194.46779,49.3916551 L185.694547,40.6919089 C185.30423,40.3048613 185.30423,39.6773332 185.694547,39.2902857 C186.084865,38.9032381 186.717694,38.9032381 187.108012,39.2902857 Z M197.115357,50.382693 L186.401279,61.0089027 L197.002151,50.5002046 L197.002252,50.4963719 L196.943142,50.442585 L196.882737,50.382693 L197.115357,50.382693 Z" id="right-arrow">
+                            </path>
+                          </g>
+                        </g>
+                      </g>
+                    </g>
+                </svg>
+              </a>
+            </div>
+          </article>
+        {%- endfor %}
+      {%- endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Guides",
+  "tag": "section",
+  "class": "pc__guides-sec",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Background"
+    },
+    {
+      "type": "color",
+      "id": "pc__bg",
+      "label": "Background Color"
+    },
+    {
+      "type": "header",
+      "content": "Content & URL's"
+    },
+    {
+      "type": "text",
+      "id": "section_label",
+      "label": "Section label"
+    },
+    {
+      "type": "text",
+      "id": "section_heading",
+      "label": "Section heading"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label color"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button color"
+    },
+    {
+      "type": "header",
+      "content": "Blog Settings"
+    },
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "Select Blog"
+    },
+    {
+      "type": "range",
+      "id": "articles_to_show",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 3,
+      "label": "Number of Articles to Show"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3,
+      "label": "Desktop Columns"
+    },
+    {
+      "type": "header",
+      "content": "Article Card Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_category_tag",
+      "label": "Show First Tag as Category Pill",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_read_time",
+      "label": "Show Estimated Read Time",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "read_time_suffix",
+      "label": "Read Time Suffix",
+      "default": "min read"
+    },
+    {
+      "type": "range",
+      "id": "excerpt_words",
+      "min": 10,
+      "max": 40,
+      "step": 2,
+      "default": 18,
+      "label": "Excerpt Word Limit"
+    },
+    {
+      "type": "text",
+      "id": "read_more_label",
+      "label": "Card Link Label",
+      "default": "Read Article"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "label": "Show Publish Date",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_author",
+      "label": "Show Author Name",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Guides",
+      "category": "General"
+    }
+  ]
+}
+{% endschema %}

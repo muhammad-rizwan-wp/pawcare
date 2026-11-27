@@ -847,6 +847,100 @@ h1.head__h1 {
 
 /* end STANDARDS */
 
+/* GUIDE */
+.guides__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.guides__grid article {
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+article .guide__media {
+  position: relative;
+  overflow: hidden;
+}
+
+article .guide__media span.badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: rgb(27, 67, 50, 0.5);
+  color: var(--color-cream);
+  padding: 5px 10px;
+  border-radius: 5px;
+  backdrop-filter: blur(5px);
+}
+
+article .guide__media img {
+  max-height: 300px;
+  object-fit: cover;
+  width: 100%;
+  transition: 0.5s ease-in;
+}
+
+article:hover .guide__media img {
+  transform: scale(1.15);
+}
+
+article .guide__content {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+article .guide__content h3 {
+  font-size: 18px;
+  margin-block: 0;
+}
+
+article .guide__content h3>a {
+  line-height: 22px;
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+article p {
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 18px;
+  margin-block: 0;
+}
+
+article .guide__readmore {
+  width: fit-content;
+  display: inline-block;
+  font-size: 14px;
+  background: var(--color-primary);
+  color: var(--color-cream);
+  padding: 0.4rem 1.15rem;
+  border-radius: 99px;
+  transition: 0.5s ease-in;
+}
+
+article .guide__readmore:hover {
+  transform: scale(1.05);
+}
+
+article svg {
+  width: 20px;
+  height: 20px;
+  transform: rotate(0deg);
+  margin-bottom: -5px;
+}
+
+article svg path {
+  fill: var(--color-cream);
+}
+
+/* end of GUIDE */
+
 /* >>> TABLET <<< */
 @media only screen and (min-width:601px) and (max-width:900px) {
   header .container {
@@ -881,6 +975,11 @@ h1.head__h1 {
   h1.head__h1 {
     font-size: 36px;
     line-height: 1.15;
+  }
+
+  h2.head__h2 {
+    font-size: 35px;
+    line-height: 45px;
   }
 
   .hero__grid {
@@ -959,6 +1058,11 @@ h1.head__h1 {
 
   /* STANDARDS */
   .pc__standard-cards {
+    grid-template-columns: none;
+  }
+
+  /* GUIDES */
+  .guides__grid {
     grid-template-columns: none;
   }
 }

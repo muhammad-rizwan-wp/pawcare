@@ -205,6 +205,30 @@
         "card_heading_color": "#012d1d",
         "card_body_color": "#414844"
       }
+    },
+    "guides_CUxFn4": {
+      "type": "Guides",
+      "name": "Guides",
+      "settings": {
+        "pc__bg": "#EBE5D9",
+        "section_label": "Vet Advice & Care Guides",
+        "section_heading": "Pet Wellness Journal",
+        "button_text": "Show all guides",
+        "button_link": "shopify://blogs/guide",
+        "label_color": "#DDA15E",
+        "heading_color": "#012D1D",
+        "button_color": "#012D1D",
+        "blog": "guide",
+        "articles_to_show": 3,
+        "columns_desktop": 3,
+        "show_category_tag": true,
+        "show_read_time": true,
+        "read_time_suffix": "min read",
+        "excerpt_words": 18,
+        "read_more_label": "Read Article",
+        "show_date": false,
+        "show_author": false
+      }
     }
   },
   "order": [
@@ -213,6 +237,7 @@
     "general_collection_QPbxi4",
     "tabs_U3bnTp",
     "banners_PVt3PB",
-    "standard_MAVFzA"
+    "standard_MAVFzA",
+    "guides_CUxFn4"
   ]
 }
